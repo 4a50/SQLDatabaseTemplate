@@ -2,6 +2,7 @@
 using SQLDatabaseTemplate.DatabaseContext;
 using SQLDatabaseTemplate.Models;
 using SQLDatabaseTemplate.ServiceRepositories.Interfaces;
+using System.Diagnostics;
 
 namespace SQLDatabaseTemplate.ServiceRepositories
 {
@@ -18,6 +19,24 @@ namespace SQLDatabaseTemplate.ServiceRepositories
       await _context.SaveChangesAsync();
       return modelOne;     
     }
+    public async Task<List<ModelOne>> GetAll()
+    {
+      List<ModelOne> listModelOne = await _context.ModelOne.ToListAsync();
+      return listModelOne;
+    }
+    public async Task<ModelOne> GetModelOne(int id)
+    {
+      var getItem = await _context.ModelOne.FirstOrDefaultAsync(s => s.Id == id);
+      if (getItem == null) getItem = new ModelOne() { Id = 0, Text = "Not Found" };
+      return getItem;
+    }
+    public async Task<ModelOne> UpdateModelOne(int id, ModelOne modelOne)
+    {
+      Debug.WriteLine($"Model Id: {id} Text: {modelOne.Text}");
+      _context.Entry(modelOne).State = EntityState.Modified;
+      await _context.SaveChangesAsync();
+      return modelOne;
+    }
     public async Task<ModelOne> DeleteModelOneRecord(int id)
     {
       var deleteModelOne = await _context.ModelOne.FirstOrDefaultAsync(i => i.Id == id);
@@ -28,18 +47,6 @@ namespace SQLDatabaseTemplate.ServiceRepositories
       }
       else { deleteModelOne = new ModelOne() { Id = 0, Text = "Not Found. Cannot Delete" }; }
       return deleteModelOne;      
-    }
-    public async Task<ModelOne> GetModelOne(int id)
-    {
-      var getItem = await _context.ModelOne.FirstOrDefaultAsync(s => s.Id == id);
-      if (getItem == null) getItem = new ModelOne() { Id = 0, Text = "Not Found" };
-      return getItem;
-    }
-    public async Task<ModelOne> UpdateModelOne(int id, ModelOne modelOne)
-    {
-      _context.Entry(modelOne).State = EntityState.Modified;
-      await _context.SaveChangesAsync();
-      return modelOne;
     }
   }
 }
