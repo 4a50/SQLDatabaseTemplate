@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLDatabaseTemplate", "SQLDatabaseTemplate\SQLDatabaseTemplate.csproj", "{C26122BA-31A1-4239-A2E9-39351EAC99AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLDatabaseTemplate", "SQLDatabaseTemplate\SQLDatabaseTemplate.csproj", "{C26122BA-31A1-4239-A2E9-39351EAC99AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{07BE4B99-F054-41A2-9776-FE03DD15D0AD}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
